@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -19,6 +20,9 @@ public class Recipe {
     private @Getter @Setter String source;
     private @Getter @Setter String url;
     private @Getter @Setter String directions;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private @Getter @Setter Set<Ingredient> ingredients;
 
     @Lob
     private @Getter @Setter Byte[] image;
