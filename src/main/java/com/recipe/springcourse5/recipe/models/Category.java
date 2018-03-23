@@ -1,4 +1,4 @@
-package com.recipe.springcourse5.recipe.model;
+package com.recipe.springcourse5.recipe.models;
 
 import lombok.Getter;
 import lombok.Setter;
