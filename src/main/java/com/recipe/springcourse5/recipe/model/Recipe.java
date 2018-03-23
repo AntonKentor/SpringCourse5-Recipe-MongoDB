@@ -1,5 +1,6 @@
 package com.recipe.springcourse5.recipe.model;
 
+import com.recipe.springcourse5.recipe.enums.Difficulty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,11 +22,20 @@ public class Recipe {
     private @Getter @Setter String url;
     private @Getter @Setter String directions;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "recipe")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private @Getter @Setter Set<Ingredient> ingredients;
+
+    @ManyToMany
+    @JoinTable(name = "recipe_category",
+               joinColumns = @JoinColumn(name = "recipe_id"),
+               inverseJoinColumns = @JoinColumn(name = "category_id"))
+     private @Getter @Setter Set<Category> categories;
 
     @Lob
     private @Getter @Setter Byte[] image;
+
+    @Enumerated(value = EnumType.STRING)
+    private @Getter @Setter Difficulty difficulty;
 
     @OneToOne(cascade = CascadeType.ALL)
     private @Getter @Setter Notes notes;
