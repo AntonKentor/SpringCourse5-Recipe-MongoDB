@@ -16,5 +16,5 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private @Getter @Setter Set<Recipe> recipes;
 
-    private @Getter @Setter String CategoryName;
+    private @Getter @Setter String description;
 }

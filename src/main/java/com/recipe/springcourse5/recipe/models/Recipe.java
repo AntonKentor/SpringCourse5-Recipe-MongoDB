@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,22 +15,17 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private @Getter @Setter Long id;
 
-    private @Getter @Setter String description;
-    private @Getter @Setter Integer prepTime;
-    private @Getter @Setter Integer cookTime;
-    private @Getter @Setter Integer servings;
-    private @Getter @Setter String source;
-    private @Getter @Setter String url;
+    @Lob
     private @Getter @Setter String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private @Getter @Setter Set<Ingredient> ingredients;
+    private @Getter @Setter Set<Ingredient> ingredients = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "recipe_category",
                joinColumns = @JoinColumn(name = "recipe_id"),
                inverseJoinColumns = @JoinColumn(name = "category_id"))
-     private @Getter @Setter Set<Category> categories;
+     private @Getter @Setter Set<Category> categories = new HashSet<>();
 
     @Lob
     private @Getter @Setter Byte[] image;
@@ -39,5 +35,12 @@ public class Recipe {
 
     @OneToOne(cascade = CascadeType.ALL)
     private @Getter @Setter Notes notes;
+
+    private @Getter @Setter String description;
+    private @Getter @Setter Integer prepTime;
+    private @Getter @Setter Integer cookTime;
+    private @Getter @Setter Integer servings;
+    private @Getter @Setter String source;
+    private @Getter @Setter String url;
 
 }
