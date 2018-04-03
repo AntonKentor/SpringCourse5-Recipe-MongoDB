@@ -1,46 +1,57 @@
 package com.recipe.springcourse5.recipe.models;
 
 import com.recipe.springcourse5.recipe.enums.Difficulty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 @Entity
 public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private @Getter @Setter Long id;
+    private Long id;
 
     @Lob
-    private @Getter @Setter String directions;
+    private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private @Getter @Setter Set<Ingredient> ingredients = new HashSet<>();
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "recipe_category",
-               joinColumns = @JoinColumn(name = "recipe_id"),
-               inverseJoinColumns = @JoinColumn(name = "category_id"))
-     private @Getter @Setter Set<Category> categories = new HashSet<>();
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new HashSet<>();
 
     @Lob
-    private @Getter @Setter Byte[] image;
+    private Byte[] image;
 
     @Enumerated(value = EnumType.STRING)
-    private @Getter @Setter Difficulty difficulty;
+    private Difficulty difficulty;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private @Getter @Setter Notes notes;
+    private Notes notes;
 
-    private @Getter @Setter String description;
-    private @Getter @Setter Integer prepTime;
-    private @Getter @Setter Integer cookTime;
-    private @Getter @Setter Integer servings;
-    private @Getter @Setter String source;
-    private @Getter @Setter String url;
+    public void setNotes(Notes notes) {
+        this.notes = notes;
+        notes.setRecipe(this);
+    }
+
+    public Recipe addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
+    }
+
+    private String description;
+    private Integer prepTime;
+    private Integer cookTime;
+    private Integer servings;
+    private String source;
+    private String url;
 
 }

@@ -1,11 +1,13 @@
 package com.recipe.springcourse5.recipe.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredient {
 
@@ -16,20 +18,26 @@ public class Ingredient {
         this.recipe = recipe;
     }
 
-    public Ingredient(){
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure) {
+        this.description = description;
+        this.amount = amount;
+        this.unitOfMeasure = unitOfMeasure;
+    }
+
+    public Ingredient() {
 
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private @Getter @Setter Long id;
+    private Long id;
 
-    private @Getter @Setter String description;
-    private @Getter @Setter BigDecimal amount;
+    private String description;
+    private BigDecimal amount;
 
     @OneToOne(fetch = FetchType.EAGER)
-    private @Getter @Setter UnitOfMeasure unitOfMeasure;
+    private UnitOfMeasure unitOfMeasure;
 
     @ManyToOne
-    private @Getter @Setter Recipe recipe;
+    private Recipe recipe;
 }

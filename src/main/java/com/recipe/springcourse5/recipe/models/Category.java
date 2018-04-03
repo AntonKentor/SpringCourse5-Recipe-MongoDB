@@ -1,20 +1,24 @@
 package com.recipe.springcourse5.recipe.models;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
+@EqualsAndHashCode(exclude = {"recipes"})
 @Entity
 public class Category {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private @Getter @Setter Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToMany(mappedBy = "categories")
-    private @Getter @Setter Set<Recipe> recipes;
+    private Set<Recipe> recipes;
 
-    private @Getter @Setter String description;
+    private String description;
 }

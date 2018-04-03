@@ -1,20 +1,21 @@
 package com.recipe.springcourse5.recipe.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
+@Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private @Getter @Setter Long id;
+    private Long id;
 
     @OneToOne
-    private @Getter @Setter Recipe recipe;
+    private Recipe recipe;
     @Lob
-    private @Getter @Setter String recipeNotes;
-
+    private String recipeNotes;
 }
