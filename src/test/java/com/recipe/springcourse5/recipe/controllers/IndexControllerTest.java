@@ -47,6 +47,7 @@ public class IndexControllerTest {
         recipeSet.add(recipe1);
         recipeSet.add(new Recipe());
 
+        // Mock method call.
         when(recipeService.getRecipes()).thenReturn(recipeSet);
 
         ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
@@ -54,6 +55,7 @@ public class IndexControllerTest {
         String viewName = indexController.getIndexPage(model);
         assertEquals(INDEX_PAGE, viewName);
 
+        //Verify the number of calls to the method.
         verify(recipeService, times(1)).getRecipes();
         verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
 
@@ -63,6 +65,8 @@ public class IndexControllerTest {
 
     @Test
     public void testMockMvc() throws Exception {
+
+        //Tests that the correct page is displayed when calling controller specific url.
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
 
         mockMvc.perform(get(""))
