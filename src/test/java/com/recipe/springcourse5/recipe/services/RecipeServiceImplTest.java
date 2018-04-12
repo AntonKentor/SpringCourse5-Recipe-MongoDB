@@ -8,9 +8,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class RecipeServiceImplTest {
@@ -26,7 +28,7 @@ public class RecipeServiceImplTest {
     }
 
     @Test
-    public void getRecipes() {
+    public void getRecipesTest() {
         Recipe recipe = new Recipe();
         Set<Recipe> recipeSet = new HashSet<>();
         recipeSet.add(recipe);
@@ -38,5 +40,20 @@ public class RecipeServiceImplTest {
         //Verify that method has been called.
         assertEquals(recipes.size(), 1);
         verify(recipeRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void getRecipeByIdTest() {
+
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        Optional<Recipe> mockRecipe = Optional.of(recipe);
+
+        when(recipeRepository.findById(1L)).thenReturn(mockRecipe);
+        Recipe recipeReturned = recipeService.findById(1L);
+        assertNotNull("Null recipe returned", recipeReturned);
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
+
     }
 }
