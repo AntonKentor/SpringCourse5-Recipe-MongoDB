@@ -19,8 +19,8 @@ public class RecipeController {
     }
 
     @RequestMapping("/show/{id}")
-    public String showById(@PathVariable String id, Model model){
-        log.info("In method showById with id-value: "+id);
+    public String showById(@PathVariable String id, Model model) {
+        log.info("In method showById with id-value: " + id);
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
         return "recipe/show";
     }
