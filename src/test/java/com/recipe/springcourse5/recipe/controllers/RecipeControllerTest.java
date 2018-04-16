@@ -42,4 +42,11 @@ public class RecipeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/show"));
     }
+
+    @Test
+    public void testDirectToNewRecipe() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
+        mockMvc.perform(get("/recipe/add"))
+                .andExpect(status().isOk()).andExpect(view().name("recipe/add"));
+    }
 }

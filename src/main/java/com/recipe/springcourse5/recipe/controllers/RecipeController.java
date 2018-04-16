@@ -24,4 +24,10 @@ public class RecipeController {
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
         return "recipe/show";
     }
+    @RequestMapping("/add")
+    public String test(Model model) {
+        log.info("In method test");
+
+        return "recipe/add";
+    }
 }
