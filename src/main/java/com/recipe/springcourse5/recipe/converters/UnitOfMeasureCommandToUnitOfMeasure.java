@@ -1,12 +1,18 @@
-package com.recipe.springcourse5.recipe.convertes;
+package com.recipe.springcourse5.recipe.converters;
 
 import com.recipe.springcourse5.recipe.commands.UnitOfMeasureCommand;
 import com.recipe.springcourse5.recipe.models.UnitOfMeasure;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 
-public class UnitOfMeasureCommandToUnitOfMeasure implements Converter<UnitOfMeasureCommand, UnitOfMeasure> {
+/**
+ * Created by jt on 6/21/17.
+ */
+@Component
+public class UnitOfMeasureCommandToUnitOfMeasure implements Converter<UnitOfMeasureCommand, UnitOfMeasure>{
+
     @Synchronized
     @Nullable
     @Override
@@ -14,9 +20,10 @@ public class UnitOfMeasureCommandToUnitOfMeasure implements Converter<UnitOfMeas
         if (source == null) {
             return null;
         }
-        final UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
-        unitOfMeasure.setId(source.getId());
-        unitOfMeasure.setDescription(source.getDescription());
-        return unitOfMeasure;
+
+        final UnitOfMeasure uom = new UnitOfMeasure();
+        uom.setId(source.getId());
+        uom.setDescription(source.getDescription());
+        return uom;
     }
 }
