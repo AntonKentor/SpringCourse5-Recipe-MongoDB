@@ -5,6 +5,7 @@ import com.recipe.springcourse5.recipe.models.Notes;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.recipe.springcourse5.recipe.TestConstants.LONG_ID_VALUE;
 import static org.junit.Assert.*;
 
 /**
@@ -12,9 +13,8 @@ import static org.junit.Assert.*;
  */
 public class NotesToNotesCommandTest {
 
-    public static final Long ID_VALUE = new Long(1L);
-    public static final String RECIPE_NOTES = "Notes";
-    NotesToNotesCommand converter;
+    private static final String RECIPE_NOTES = "Notes";
+    private NotesToNotesCommand converter;
 
     @Before
     public void setUp() throws Exception {
@@ -25,14 +25,14 @@ public class NotesToNotesCommandTest {
     public void convert() throws Exception {
         //given
         Notes notes = new Notes();
-        notes.setId(ID_VALUE);
+        notes.setId(LONG_ID_VALUE);
         notes.setRecipeNotes(RECIPE_NOTES);
 
         //when
         NotesCommand notesCommand = converter.convert(notes);
 
         //then
-        assertEquals(ID_VALUE, notesCommand.getId());
+        assertEquals(LONG_ID_VALUE, notesCommand.getId());
         assertEquals(RECIPE_NOTES, notesCommand.getRecipeNotes());
     }
 

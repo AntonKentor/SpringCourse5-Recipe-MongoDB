@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
+import static com.recipe.springcourse5.recipe.TestConstants.DESCRIPTION;
+import static com.recipe.springcourse5.recipe.TestConstants.LONG_ID_VALUE;
 import static org.junit.Assert.*;
 
 /**
@@ -16,14 +18,10 @@ import static org.junit.Assert.*;
  */
 public class IngredientToIngredientCommandTest {
 
-    public static final Recipe RECIPE = new Recipe();
-    public static final BigDecimal AMOUNT = new BigDecimal("1");
-    public static final String DESCRIPTION = "Cheeseburger";
-    public static final Long UOM_ID = new Long(2L);
-    public static final Long ID_VALUE = new Long(1L);
-
-
-    IngredientToIngredientCommand converter;
+    private static final Recipe RECIPE = new Recipe();
+    private static final BigDecimal AMOUNT = new BigDecimal("1");
+    private static final Long UOM_ID = 2L;
+    private IngredientToIngredientCommand converter;
 
     @Before
     public void setUp() throws Exception {
@@ -44,7 +42,7 @@ public class IngredientToIngredientCommandTest {
     public void testConvertNullUOM() throws Exception {
         //given
         Ingredient ingredient = new Ingredient();
-        ingredient.setId(ID_VALUE);
+        ingredient.setId(LONG_ID_VALUE);
         ingredient.setRecipe(RECIPE);
         ingredient.setAmount(AMOUNT);
         ingredient.setDescription(DESCRIPTION);
@@ -53,7 +51,7 @@ public class IngredientToIngredientCommandTest {
         IngredientCommand ingredientCommand = converter.convert(ingredient);
         //then
         assertNull(ingredientCommand.getUnitOfMeasure());
-        assertEquals(ID_VALUE, ingredientCommand.getId());
+        assertEquals(LONG_ID_VALUE, ingredientCommand.getId());
         // assertEquals(RECIPE, ingredientCommand.get);
         assertEquals(AMOUNT, ingredientCommand.getAmount());
         assertEquals(DESCRIPTION, ingredientCommand.getDescription());
@@ -63,7 +61,7 @@ public class IngredientToIngredientCommandTest {
     public void testConvertWithUom() throws Exception {
         //given
         Ingredient ingredient = new Ingredient();
-        ingredient.setId(ID_VALUE);
+        ingredient.setId(LONG_ID_VALUE);
         ingredient.setRecipe(RECIPE);
         ingredient.setAmount(AMOUNT);
         ingredient.setDescription(DESCRIPTION);
@@ -75,7 +73,7 @@ public class IngredientToIngredientCommandTest {
         //when
         IngredientCommand ingredientCommand = converter.convert(ingredient);
         //then
-        assertEquals(ID_VALUE, ingredientCommand.getId());
+        assertEquals(LONG_ID_VALUE, ingredientCommand.getId());
         assertNotNull(ingredientCommand.getUnitOfMeasure());
         assertEquals(UOM_ID, ingredientCommand.getUnitOfMeasure().getId());
         // assertEquals(RECIPE, ingredientCommand.get);

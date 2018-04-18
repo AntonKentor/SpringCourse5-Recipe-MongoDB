@@ -9,25 +9,20 @@ import com.recipe.springcourse5.recipe.models.Recipe;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.recipe.springcourse5.recipe.TestConstants.*;
 import static org.junit.Assert.*;
 
 public class RecipeCommandToRecipeTest {
-    public static final Long RECIPE_ID = 1L;
-    public static final Integer COOK_TIME = Integer.valueOf("5");
-    public static final Integer PREP_TIME = Integer.valueOf("7");
-    public static final String DESCRIPTION = "My Recipe";
-    public static final String DIRECTIONS = "Directions";
-    public static final Difficulty DIFFICULTY = Difficulty.EASY;
-    public static final Integer SERVINGS = Integer.valueOf("3");
-    public static final String SOURCE = "Source";
-    public static final String URL = "Some URL";
-    public static final Long CAT_ID_1 = 1L;
-    public static final Long CAT_ID2 = 2L;
-    public static final Long INGRED_ID_1 = 3L;
-    public static final Long INGRED_ID_2 = 4L;
-    public static final Long NOTES_ID = 9L;
-
-    RecipeCommandToRecipe converter;
+    private static final Long RECIPE_ID = 1L;
+    private static final String SOURCE = "Source";
+    private static final String URL = "Some URL";
+    private static final Long CAT_ID_1 = 1L;
+    private static final Long CAT_ID2 = 2L;
+    private static final Long INGRED_ID_1 = 3L;
+    private static final Long INGRED_ID_2 = 4L;
+    private static final Long NOTES_ID = 9L;
+    private static final Difficulty DIFFICULTY = Difficulty.MODERATE;
+    private RecipeCommandToRecipe converter;
 
 
     @Before
@@ -85,7 +80,7 @@ public class RecipeCommandToRecipeTest {
         recipeCommand.getIngredients().add(ingredient2);
 
         //when
-        Recipe recipe  = converter.convert(recipeCommand);
+        Recipe recipe = converter.convert(recipeCommand);
 
         assertNotNull(recipe);
         assertEquals(RECIPE_ID, recipe.getId());

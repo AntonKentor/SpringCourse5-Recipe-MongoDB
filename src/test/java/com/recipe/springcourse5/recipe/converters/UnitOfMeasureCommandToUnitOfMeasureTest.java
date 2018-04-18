@@ -5,14 +5,13 @@ import com.recipe.springcourse5.recipe.models.UnitOfMeasure;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.recipe.springcourse5.recipe.TestConstants.DESCRIPTION;
 import static org.junit.Assert.*;
 
 public class UnitOfMeasureCommandToUnitOfMeasureTest {
 
-    public static final String DESCRIPTION = "description";
-    public static final Long LONG_VALUE = new Long(1L);
-
-    UnitOfMeasureCommandToUnitOfMeasure converter;
+    private static final Long LONG_VALUE = 1L;
+    private UnitOfMeasureCommandToUnitOfMeasure converter;
 
     @Before
     public void setUp() throws Exception {
