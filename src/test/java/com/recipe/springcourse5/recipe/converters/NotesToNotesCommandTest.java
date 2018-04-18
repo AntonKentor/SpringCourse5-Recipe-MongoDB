@@ -8,9 +8,6 @@ import org.junit.Test;
 import static com.recipe.springcourse5.recipe.TestConstants.LONG_ID_VALUE;
 import static org.junit.Assert.*;
 
-/**
- * Created by jt on 6/21/17.
- */
 public class NotesToNotesCommandTest {
 
     private static final String RECIPE_NOTES = "Notes";

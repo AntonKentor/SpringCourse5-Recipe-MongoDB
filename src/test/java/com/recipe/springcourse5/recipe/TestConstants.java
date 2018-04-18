@@ -1,6 +1,5 @@
 package com.recipe.springcourse5.recipe;
 
-import com.recipe.springcourse5.recipe.enums.Difficulty;
 
 public interface TestConstants {
 

@@ -8,9 +8,6 @@ import org.junit.Test;
 import static com.recipe.springcourse5.recipe.TestConstants.DESCRIPTION;
 import static org.junit.Assert.*;
 
-/**
- * Created by jt on 6/21/17.
- */
 public class UnitOfMeasureToUnitOfMeasureCommandTest {
 
     private static final Long LONG_VALUE = 1L;
