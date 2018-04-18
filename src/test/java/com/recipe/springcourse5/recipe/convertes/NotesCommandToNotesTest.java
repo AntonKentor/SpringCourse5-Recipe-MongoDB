@@ -24,12 +24,12 @@ public class NotesCommandToNotesTest {
     }
 
     @Test
-    public void testNullObject(){
+    public void testNullObject() {
         assertNull(converter.convert(null));
     }
 
     @Test
-    public void testEmptyObject(){
+    public void testEmptyObject() {
         Assert.assertNotNull(converter.convert(new NotesCommand()));
     }
 
@@ -43,8 +43,8 @@ public class NotesCommandToNotesTest {
 
         Notes convertedNotes = converter.convert(notesCommand);
         assertNotNull(convertedNotes);
-        assertEquals(convertedNotes.getId(), LONG_ID_VALUE);
-        assertEquals(convertedNotes.getRecipe(), recipe);
-        assertEquals(convertedNotes.getRecipeNotes(), RECIPE_NOTES);
+        assertEquals(LONG_ID_VALUE, convertedNotes.getId());
+        assertEquals(recipe, convertedNotes.getRecipe());
+        assertEquals(RECIPE_NOTES, convertedNotes.getRecipeNotes());
     }
 }

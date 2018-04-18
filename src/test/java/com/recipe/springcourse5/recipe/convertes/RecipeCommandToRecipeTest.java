@@ -27,12 +27,12 @@ public class RecipeCommandToRecipeTest {
     }
 
     @Test
-    public void testNullObject(){
+    public void testNullObject() {
         assertNull(converter.convert(null));
     }
 
     @Test
-    public void testEmptyObject(){
+    public void testEmptyObject() {
         assertNotNull(converter.convert(new RecipeCommand()));
     }
 
@@ -55,17 +55,17 @@ public class RecipeCommandToRecipeTest {
         Recipe convertedRecipe = converter.convert(recipeCommand);
 
         assertNotNull(convertedRecipe);
-        assertEquals(convertedRecipe.getId(), LONG_ID_VALUE);
-        assertEquals(convertedRecipe.getIngredients(), ingredients);
-        assertEquals(convertedRecipe.getCategories(), categories);
-        assertEquals(convertedRecipe.getCookTime(), COOK_TIME);
-        assertEquals(convertedRecipe.getDescription(), DESCRIPTION);
-        assertEquals(convertedRecipe.getDifficulty(), Difficulty.MODERATE);
-        assertEquals(convertedRecipe.getNotes(), notes);
-        assertEquals(convertedRecipe.getPrepTime(), PREP_TIME);
-        assertEquals(convertedRecipe.getServings(), SERVINGS);
-        assertEquals(convertedRecipe.getSource(), SOURCE);
-        assertEquals(convertedRecipe.getUrl(), URL);
+        assertEquals(LONG_ID_VALUE, convertedRecipe.getId());
+        assertEquals(ingredients, convertedRecipe.getIngredients());
+        assertEquals(categories, convertedRecipe.getCategories());
+        assertEquals(COOK_TIME, convertedRecipe.getCookTime());
+        assertEquals(DESCRIPTION, convertedRecipe.getDescription());
+        assertEquals(Difficulty.MODERATE, convertedRecipe.getDifficulty());
+        assertEquals(notes, convertedRecipe.getNotes());
+        assertEquals(PREP_TIME, convertedRecipe.getPrepTime());
+        assertEquals(SERVINGS, convertedRecipe.getServings());
+        assertEquals(SOURCE, convertedRecipe.getSource());
+        assertEquals(URL, convertedRecipe.getUrl());
 
     }
 }

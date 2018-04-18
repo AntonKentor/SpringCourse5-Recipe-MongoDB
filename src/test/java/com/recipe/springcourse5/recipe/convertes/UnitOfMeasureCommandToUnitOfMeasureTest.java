@@ -37,7 +37,7 @@ public class UnitOfMeasureCommandToUnitOfMeasureTest {
         UnitOfMeasure convertedUnitOfMeasure = converter.convert(unitOfMeasureCommand);
 
         assertNotNull(convertedUnitOfMeasure);
-        assertEquals(convertedUnitOfMeasure.getId(), LONG_ID_VALUE);
-        assertEquals(convertedUnitOfMeasure.getDescription(), DESCRIPTION);
+        assertEquals(LONG_ID_VALUE, convertedUnitOfMeasure.getId());
+        assertEquals(DESCRIPTION, convertedUnitOfMeasure.getDescription());
     }
 }

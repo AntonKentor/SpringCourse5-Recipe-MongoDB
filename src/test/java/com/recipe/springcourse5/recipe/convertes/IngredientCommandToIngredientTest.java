@@ -46,11 +46,11 @@ public class IngredientCommandToIngredientTest {
 
         Ingredient convertedIngredient = converter.convert(ingredientCommand);
         assertNotNull(convertedIngredient);
-        assertEquals(convertedIngredient.getId(), LONG_ID_VALUE);
-        assertEquals(convertedIngredient.getAmount(), amount);
-        assertEquals(convertedIngredient.getDescription(), DESCRIPTION);
-        assertEquals(convertedIngredient.getRecipe(), recipe);
-        assertEquals(convertedIngredient.getUnitOfMeasure(), unitOfMeasure);
+        assertEquals(LONG_ID_VALUE, convertedIngredient.getId());
+        assertEquals(amount, convertedIngredient.getAmount());
+        assertEquals(DESCRIPTION, convertedIngredient.getDescription());
+        assertEquals(recipe, convertedIngredient.getRecipe());
+        assertEquals(unitOfMeasure, convertedIngredient.getUnitOfMeasure());
 
     }
 }

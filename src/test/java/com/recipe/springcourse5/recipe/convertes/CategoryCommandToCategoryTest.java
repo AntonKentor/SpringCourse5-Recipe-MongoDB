@@ -30,7 +30,7 @@ public class CategoryCommandToCategoryTest {
     }
 
     @Test
-    public void testEmptyObject(){
+    public void testEmptyObject() {
         assertNotNull(converter.convert(new CategoryCommand()));
     }
 
@@ -44,8 +44,8 @@ public class CategoryCommandToCategoryTest {
 
         Category convertedCategory = converter.convert(categoryCommand);
         assertNotNull(convertedCategory);
-        assertEquals(convertedCategory.getId(), LONG_ID_VALUE);
-        assertEquals(convertedCategory.getDescription(), DESCRIPTION);
-        assertEquals(convertedCategory.getRecipes(), recipes);
+        assertEquals(LONG_ID_VALUE, convertedCategory.getId());
+        assertEquals(DESCRIPTION, convertedCategory.getDescription());
+        assertEquals(recipes, convertedCategory.getRecipes());
     }
 }
