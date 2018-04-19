@@ -1,5 +1,6 @@
 package com.recipe.springcourse5.recipe.services;
 
+import com.recipe.springcourse5.recipe.converters.*;
 import com.recipe.springcourse5.recipe.models.Recipe;
 import com.recipe.springcourse5.recipe.repositories.RecipeRepository;
 import org.junit.Before;
@@ -19,12 +20,17 @@ public class RecipeServiceImplTest {
 
     @Mock
     private RecipeRepository recipeRepository;
+
     private RecipeService recipeService;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        RecipeToRecipeCommand recipeToRecipeCommand;
+        RecipeCommandToRecipe recipeCommandToRecipe;
+        recipeToRecipeCommand = new RecipeToRecipeCommand(new CategoryToCategoryCommand(), new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()), new NotesToNotesCommand());
+        recipeCommandToRecipe = new RecipeCommandToRecipe(new CategoryCommandToCategory(), new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()), new NotesCommandToNotes());
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
@@ -54,6 +60,6 @@ public class RecipeServiceImplTest {
         assertNotNull("Null recipe returned", recipeReturned);
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
-
     }
+
 }

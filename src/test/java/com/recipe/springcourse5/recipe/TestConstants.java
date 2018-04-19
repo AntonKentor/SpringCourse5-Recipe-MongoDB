@@ -5,6 +5,7 @@ public interface TestConstants {
 
     public static final Long LONG_ID_VALUE = 1L;
     public static final String DESCRIPTION = "description";
+    public static final String NEW_DESCRIPTION = "new description";
     public static final String DIRECTIONS = "Directions";
     public static final Integer COOK_TIME = 30;
     public static final Integer PREP_TIME = 40;
