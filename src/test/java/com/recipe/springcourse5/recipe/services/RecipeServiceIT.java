@@ -1,14 +1,12 @@
 package com.recipe.springcourse5.recipe.services;
 
 import com.recipe.springcourse5.recipe.commands.RecipeCommand;
-import com.recipe.springcourse5.recipe.converters.RecipeCommandToRecipe;
 import com.recipe.springcourse5.recipe.converters.RecipeToRecipeCommand;
 import com.recipe.springcourse5.recipe.models.Recipe;
 import com.recipe.springcourse5.recipe.repositories.RecipeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -37,13 +35,12 @@ public class RecipeServiceIT {
         RecipeCommand testRecipeCommand = recipeToRecipeCommand.convert(testRecipe);
 
         testRecipeCommand.setDescription(NEW_DESCRIPTION);
-        RecipeCommand savedRecipeCommand = recipeService.saveNewRecipe(testRecipeCommand);
+        RecipeCommand savedRecipeCommand = recipeService.saveRecipeCommand(testRecipeCommand);
 
         assertEquals(NEW_DESCRIPTION, savedRecipeCommand.getDescription());
         assertEquals(testRecipe.getId(), savedRecipeCommand.getId());
         assertEquals(testRecipe.getCategories().size(), testRecipeCommand.getCategories().size());
         assertEquals(testRecipe.getCategories().size(), testRecipeCommand.getCategories().size());
-
     }
 
 

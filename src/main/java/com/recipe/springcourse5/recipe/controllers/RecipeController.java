@@ -1,10 +1,13 @@
 package com.recipe.springcourse5.recipe.controllers;
 
+import com.recipe.springcourse5.recipe.commands.RecipeCommand;
 import com.recipe.springcourse5.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
@@ -18,16 +21,31 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping("/show/{id}")
+    @RequestMapping("/{id}/show")
     public String showById(@PathVariable String id, Model model) {
         log.info("In method showById with id-value: " + id);
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
         return "recipe/show";
     }
-    @RequestMapping("/add")
-    public String test(Model model) {
-        log.info("In method test");
 
-        return "recipe/add";
+    @RequestMapping("/new")
+    public String newRecipe(Model model) {
+        log.info("In method newRecipe");
+        model.addAttribute("recipe", new RecipeCommand());
+        return "recipe/recipeForm";
+    }
+
+    @RequestMapping("/{id}/update")
+    public String updateRecipe(@PathVariable String id, Model model) {
+        log.info("updating recipe with id: +" + id);
+        model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
+        return "recipe/recipeForm";
+    }
+
+    @PostMapping("saveOrUpdate")
+    public String saveOrUpdateRecipe(@ModelAttribute RecipeCommand command) {
+        RecipeCommand recipeCommand = recipeService.saveRecipeCommand(command);
+        log.info("Saving/updating recipe");
+        return "redirect:/recipe/" + recipeCommand.getId() + "/show";
     }
 }
