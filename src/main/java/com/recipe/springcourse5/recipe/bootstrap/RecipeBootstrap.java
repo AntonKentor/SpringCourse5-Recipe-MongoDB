@@ -28,11 +28,19 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         this.unitOfMeasureRepository = unitOfMeasureRepository;
     }
 
+
+    /*
+    * This method is invoked first when application context gets initialized or refreshed.
+    * Since class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent>
+    * and override onApplicationEvent where the initial recipes are created
+    * and saved, according to the method.
+    *
+    * */
     @Transactional
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        log.debug("In onApplicationEvent, creates recipes for Bootstrap.");
         recipeRepository.saveAll(getRecipes());
-        log.debug("In onApplicationEvent");
     }
 
     private CategoryRepository categoryRepository;
