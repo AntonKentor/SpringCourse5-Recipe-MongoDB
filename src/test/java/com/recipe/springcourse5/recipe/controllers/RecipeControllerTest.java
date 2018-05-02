@@ -25,8 +25,6 @@ public class RecipeControllerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private Model model;
-    @Mock
     private RecipeService recipeService;
 
     @Before

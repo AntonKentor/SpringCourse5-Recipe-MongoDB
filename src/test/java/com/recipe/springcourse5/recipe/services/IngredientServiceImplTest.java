@@ -5,6 +5,7 @@ import com.recipe.springcourse5.recipe.converters.IngredientToIngredientCommand;
 import com.recipe.springcourse5.recipe.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.recipe.springcourse5.recipe.models.Ingredient;
 import com.recipe.springcourse5.recipe.models.Recipe;
+import com.recipe.springcourse5.recipe.repositories.IngredientRepository;
 import com.recipe.springcourse5.recipe.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,18 +16,17 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class IngredientServiceImplTest {
 
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
 
     @Mock
-    RecipeRepository recipeRepository;
-
-    IngredientService ingredientService;
+    private RecipeRepository recipeRepository;
+    @Mock
+    private IngredientRepository ingredientRepository;
+    private IngredientService ingredientService;
 
     //init converters
     public IngredientServiceImplTest() {
@@ -37,7 +37,7 @@ public class IngredientServiceImplTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, recipeRepository);
+        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, recipeRepository, ingredientRepository);
     }
 
     @Test

@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#" th:href="@{/recipe/new}" class="btn btn-primary" role="button">Add new recipe</a>
+            <a href="#" th:href="@{/recipe/{recipeId}/ingredients(recipeId=${ingredient.recipeId})}" class="btn btn-primary" role="button">Back to ingredients</a>
         </div>
     </div>
 </div>
