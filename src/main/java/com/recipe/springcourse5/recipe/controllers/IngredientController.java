@@ -1,6 +1,8 @@
 package com.recipe.springcourse5.recipe.controllers;
 
 import com.recipe.springcourse5.recipe.commands.IngredientCommand;
+import com.recipe.springcourse5.recipe.commands.RecipeCommand;
+import com.recipe.springcourse5.recipe.commands.UnitOfMeasureCommand;
 import com.recipe.springcourse5.recipe.services.IngredientService;
 import com.recipe.springcourse5.recipe.services.RecipeService;
 import com.recipe.springcourse5.recipe.services.UnitOfMeasureService;
@@ -61,6 +63,24 @@ public class IngredientController {
         log.debug("saved ingredient id:" + savedCommand.getId());
 
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+    }
+
+    @GetMapping("/recipe/{recipeId}/ingredient/new")
+    public String newIngredient(@PathVariable String recipeId, Model model) {
+
+        //make sure we have a good id value
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+        //todo raise exception if null
+
+        //need to return back parent id for hidden form property
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient", ingredientCommand);
+
+        //init uom
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+        return "recipe/ingredient/ingredientForm";
     }
 
 }
