@@ -45,7 +45,7 @@ public class RecipeServiceImpl implements RecipeService {
 
         if (!recipe.isPresent()) {
             log.error("No recipe with id was found");
-            throw new NotFoundException("No recipe with id: " + id + "was found");
+            throw new NotFoundException("No recipe with id " + id + " was found");
         }
         return recipe.get();
     }
