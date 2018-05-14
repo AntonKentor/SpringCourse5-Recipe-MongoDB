@@ -3,6 +3,7 @@ package com.recipe.springcourse5.recipe.services;
 import com.recipe.springcourse5.recipe.commands.RecipeCommand;
 import com.recipe.springcourse5.recipe.converters.RecipeCommandToRecipe;
 import com.recipe.springcourse5.recipe.converters.RecipeToRecipeCommand;
+import com.recipe.springcourse5.recipe.exceptions.NotFoundException;
 import com.recipe.springcourse5.recipe.models.Recipe;
 import com.recipe.springcourse5.recipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +45,7 @@ public class RecipeServiceImpl implements RecipeService {
 
         if (!recipe.isPresent()) {
             log.error("No recipe with id was found");
-            throw new RuntimeException("No recipe with id: " + id + "was found");
+            throw new NotFoundException("No recipe with id: " + id + "was found");
         }
         return recipe.get();
     }

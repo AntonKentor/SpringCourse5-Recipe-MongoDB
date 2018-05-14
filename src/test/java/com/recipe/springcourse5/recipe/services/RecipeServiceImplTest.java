@@ -3,6 +3,7 @@ package com.recipe.springcourse5.recipe.services;
 import com.recipe.springcourse5.recipe.commands.RecipeCommand;
 import com.recipe.springcourse5.recipe.converters.RecipeCommandToRecipe;
 import com.recipe.springcourse5.recipe.converters.RecipeToRecipeCommand;
+import com.recipe.springcourse5.recipe.exceptions.NotFoundException;
 import com.recipe.springcourse5.recipe.models.Recipe;
 import com.recipe.springcourse5.recipe.repositories.RecipeRepository;
 import org.junit.Before;
@@ -99,6 +100,14 @@ public class RecipeServiceImplTest {
 
         //then
         verify(recipeRepository, times(1)).deleteById(anyLong());
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getRecipeByIdRecipeNotFound(){
+        Optional<Recipe> recipe = Optional.empty();
+        when(recipeRepository.findById(anyLong())).thenReturn(recipe);
+
+        Recipe returnedRecipe = recipeService.findById(1L);
     }
 
 }
