@@ -1,7 +1,6 @@
 package com.recipe.springcourse5.recipe.services;
 
 import com.recipe.springcourse5.recipe.commands.RecipeCommand;
-import com.recipe.springcourse5.recipe.converters.RecipeCommandToRecipe;
 import com.recipe.springcourse5.recipe.converters.RecipeToRecipeCommand;
 import com.recipe.springcourse5.recipe.models.Recipe;
 import com.recipe.springcourse5.recipe.repositories.RecipeRepository;
@@ -26,8 +25,6 @@ public class RecipeServiceIT {
     private RecipeService recipeService;
     @Autowired
     private RecipeRepository recipeRepository;
-    @Autowired
-    private RecipeCommandToRecipe recipeCommandToRecipe;
     @Autowired
     private RecipeToRecipeCommand recipeToRecipeCommand;
 
