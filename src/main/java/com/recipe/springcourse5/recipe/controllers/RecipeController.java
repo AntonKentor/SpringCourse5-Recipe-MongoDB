@@ -5,7 +5,10 @@ import com.recipe.springcourse5.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -40,9 +43,18 @@ public class RecipeController {
     }
 
     @PostMapping("/saveOrUpdate")
-    public String saveOrUpdateRecipe(@ModelAttribute RecipeCommand command) {
-        RecipeCommand recipeCommand = recipeService.saveRecipeCommand(command);
+    public String saveOrUpdateRecipe(@Valid @ModelAttribute("recipe") RecipeCommand command, BindingResult bindingResult) {
         log.info("Saving/updating recipe");
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> {
+                log.debug(objectError.toString());
+            });
+
+            return "recipe/recipeform";
+        }
+
+        RecipeCommand recipeCommand = recipeService.saveRecipeCommand(command);
         return "redirect:/recipe/" + recipeCommand.getId() + "/show";
     }
 
