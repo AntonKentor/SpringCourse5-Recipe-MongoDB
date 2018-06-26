@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class IndexControllerTest {
 
-    private final static String INDEX_PAGE = "index.html";
+    private final static String INDEX_PAGE = "/recipe/list.html";
 
     private IndexController indexController;
     @Mock
@@ -77,7 +77,7 @@ public class IndexControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name(INDEX_PAGE));
 
-        mockMvc.perform(get("/index"))
+        mockMvc.perform(get("/recipe/list"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(INDEX_PAGE));
 
