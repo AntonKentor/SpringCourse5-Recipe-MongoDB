@@ -30,12 +30,12 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
 
     /*
-    * This method is invoked first when application context gets initialized or refreshed.
-    * Since class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent>
-    * and override onApplicationEvent where the initial recipes are created
-    * and saved, according to the method.
-    *
-    * */
+     * This method is invoked first when application context gets initialized or refreshed.
+     * Since class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent>
+     * and override onApplicationEvent where the initial recipes are created
+     * and saved, according to the method.
+     *
+     * */
     @Transactional
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
