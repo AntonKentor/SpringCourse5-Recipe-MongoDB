@@ -1,4 +1,4 @@
-package com.recipe.springcourse5.recipe.configurations.dev;
+package com.recipe.springcourse5.recipe.configurations;
 
 import org.h2.server.web.WebServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
