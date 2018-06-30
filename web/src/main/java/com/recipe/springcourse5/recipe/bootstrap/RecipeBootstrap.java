@@ -141,7 +141,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Category fastFood = fastfoodCategory.get();
 
         Recipe guacamoleRecipe = new Recipe();
-        guacamoleRecipe.setDescription("Perfect Guacamole");
+        guacamoleRecipe.setDescription("Perfect Guacamole H2");
         guacamoleRecipe.setPrepTime(10);
         guacamoleRecipe.setCookTime(10);
         guacamoleRecipe.setDifficulty(Difficulty.EASY);
@@ -182,7 +182,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
 
         Recipe grilledChickenRecipe = new Recipe();
-        grilledChickenRecipe.setDescription("Spicy grilled chicken tacos");
+        grilledChickenRecipe.setDescription("Spicy grilled chicken tacos H2");
         grilledChickenRecipe.setCookTime(9);
         grilledChickenRecipe.setPrepTime(20);
         grilledChickenRecipe.setDifficulty(Difficulty.HARD);

@@ -8,6 +8,7 @@
     <version>0.0.1</version>
     <modules>
         <module>web</module>
+        <module>database</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -94,6 +95,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="changelog_baseline_populate_tables.xml">
+
+    <changeSet id="POPUULATE_RECIPE_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
+        <sqlFile splitStatements="true" endDelimiter="GO" path="sql/PopulateRecipeTable.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="POPUULATE_UNIT_OF_MEASURE_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
+        <sqlFile splitStatements="true" endDelimiter="GO" path="sql/PopulateUnitOfMeasureTable.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="POPUULATE_NOTES_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
+        <sqlFile splitStatements="true" endDelimiter="GO" path="sql/PopulateNotesTable.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="POPUULATE_INGREDIENT_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
+        <sqlFile splitStatements="true" endDelimiter="GO" path="sql/PopulateIngredientTable.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+</databaseChangeLog>

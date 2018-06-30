@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="changelog_baseline_populate_tables_arkiv.xml">
+
+    <changeSet id="CREATE_RECIPE_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
+        <sqlFile splitStatements="true" endDelimiter="GO" path="sql/CreateRecipeTable.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="CREATE_NOTES_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
+        <sqlFile splitStatements="true" endDelimiter="GO" path="sql/CreateNotesTable.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="CREATE_RECIPE_CATEGORY_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
+        <sqlFile splitStatements="true" endDelimiter="GO" path="sql/CreateRecipeCategoryTable.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="CREATE_UNIT_OF_MEASURE_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
+        <sqlFile splitStatements="true" endDelimiter="GO" path="sql/CreateUnitOfMeasureTable.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="CREATE_INGREDIENT_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
+        <sqlFile splitStatements="true" endDelimiter="GO" path="sql/CreateIngredientTable.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="CREATE_CATEGORY_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
+        <sqlFile splitStatements="true" endDelimiter="GO" path="sql/CreateCategoryTable.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+</databaseChangeLog>
