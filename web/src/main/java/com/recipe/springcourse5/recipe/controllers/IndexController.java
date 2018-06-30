@@ -29,7 +29,7 @@ public class IndexController {
     public String getIndexPage(Model model) {
         log.debug("in getIndexPage");
         model.addAttribute("recipes", recipeService.getRecipes());
-        return "/recipe/list.html";
+        return "recipe/list.html";
     }
 
     @GetMapping(value = "/logout")

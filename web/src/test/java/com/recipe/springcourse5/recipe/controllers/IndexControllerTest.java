@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class IndexControllerTest {
 
-    private final static String INDEX_PAGE = "/recipe/list.html";
+    private final static String INDEX_PAGE = "recipe/list.html";
 
     private IndexController indexController;
     @Mock
