@@ -99,6 +99,10 @@
                     <includes>
                         <include>**/*IT.java</include>
                     </includes>
+                    <additionalClassPathElements>
+                        <additionalClassPathElement>${basedir}/target/classes</additionalClassPathElement>
+                    </additionalClassPathElements>
+                    <parallell>none</parallell>
                 </configuration>
                 <executions>
                     <execution>
