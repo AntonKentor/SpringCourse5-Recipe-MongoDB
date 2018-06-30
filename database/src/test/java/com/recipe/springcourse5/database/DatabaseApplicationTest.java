@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("prod")
+@ActiveProfiles("dev")
 public class DatabaseApplicationTest {
 
     @Test
