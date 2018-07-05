@@ -31,35 +31,35 @@
     <!--/*< <th:block th:include="fragments/navigationbar :: navigationheader"></th:block>/*/-->
 </head>
 <body>
-<div th:insert="${param.logout} ? ~{fragments/goodbyeheader :: goodbyeheader} : ~{fragments/welcomeheader :: welcomeheader}"></div>
+
 <div class="container-fluid">
-    <div class="col-md-2 col-md-offset-5">
         <div class="pannel-group">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1 class="panel-title">Login</h1>
+                    <h1 class="panel-title">Register</h1>
                 </div>
                 <div class="panel-body">
 
-                    <div th:if="${param.error}" class="alert alert-danger">
-                        Invalid username or password.
-                    </div>
-                    <div th:if="${param.logout}" class="alert alert-success">
-                        You have been logged out.
-                    </div>
                     <form th:action="@{/login}" method="post">
-                        <div><label> User Name<input type="text" name="username" class="form-control col-md-5"/> </label>
+                        <div><label>First name<input type="text" name="firstname" class="form-control col-md-6"/>
+                        </label>
                         </div>
-                        <br/>
-                        <div><label> Password<input type="password" name="password" class="form-control col-md-5"/>
+                        <div><label>Lastname<input type="text" name="lastname" class="form-control col-md-6"/>
+                        </label>
+                        </div>
+                        <div><label> User Name<input type="text" name="username" class="form-control col-md-6"/>
+                        </label>
+                        </div>
+                        <div><label>Email<input type="email" name="email" class="form-control col-md-6"/>
+                        </label>
+                        </div>
+                        <div><label> Password<input type="password" name="password" class="form-control col-md-6"/>
                         </label></div>
                         <br/>
-                        <div><input th:action="@{/}" type="submit" value="Sign In" class="btn btn-default col-md-12"/></div>
+                        <div><input th:action="@{/}" type="submit" value="Register" class="btn btn-default col-md-12"/></div>
                     </form>
                 </div>
             </div>
-        </div>
-        <a href="#" th:href="@{'/recipe/new'}" class="col-md-offset-5">Register</a>
     </div>
 </div>
 </body>

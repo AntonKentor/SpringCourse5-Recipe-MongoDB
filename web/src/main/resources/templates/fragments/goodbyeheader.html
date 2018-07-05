@@ -22,24 +22,12 @@
 </head>
 <body>
 
-<div th:fragment="navigationheader">
+<div style="margin-bottom: 20px" th:fragment="goodbyeheader">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand">Recipes</a>
+                    <a class="navbar-brand" disabled="true">Good bye</a>
                 </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="#" th:href="@{'/recipe/list'}">Show all</a></li>
-                    <li><a href="#" th:href="@{'/recipe/new'}">Add new</a></li>
-                    <li><a style="margin-left: 150px">[[${#httpServletRequest.remoteUser}]]</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-
-                        <a href="#" th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
-
-                    </li>
-                </ul>
             </div>
         </nav>
 </div>
