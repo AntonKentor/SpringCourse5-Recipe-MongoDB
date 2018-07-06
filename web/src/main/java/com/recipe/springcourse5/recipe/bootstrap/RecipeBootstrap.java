@@ -5,6 +5,7 @@ import com.recipe.springcourse5.recipe.models.*;
 import com.recipe.springcourse5.recipe.repositories.CategoryRepository;
 import com.recipe.springcourse5.recipe.repositories.RecipeRepository;
 import com.recipe.springcourse5.recipe.repositories.UnitOfMeasureRepository;
+import com.recipe.springcourse5.recipe.repositories.UserInfoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -24,11 +25,13 @@ import java.util.Optional;
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
-    public RecipeBootstrap(CategoryRepository categoryRepository, RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
+    public RecipeBootstrap(CategoryRepository categoryRepository, RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository, UserInfoRepository userInfoRepository) {
         this.categoryRepository = categoryRepository;
         this.recipeRepository = recipeRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
+        this.userInfoRepository = userInfoRepository;
     }
+
 
     /*
      * This method is invoked first when application context gets initialized or refreshed.
@@ -42,11 +45,25 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         log.debug("In onApplicationEvent, creates recipes for Bootstrap.");
         recipeRepository.saveAll(getRecipes());
+        userInfoRepository.save(createInitialUser());
+    }
+
+    private UserInfo createInitialUser() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserName("user");
+        userInfo.setCountry("Sweden");
+        userInfo.setEnabled(true);
+        userInfo.setFirstname("Anton");
+        userInfo.setLastName("Testsson");
+        userInfo.setPassword("$2a$10$DEAofXgFU8lUj3p.s3LPme63XpTjPPxQWsxZVlrvfhSd.ekdSl/oO");
+        userInfo.setRole("ROLE_ADMIN");
+        return userInfo;
     }
 
     private CategoryRepository categoryRepository;
     private RecipeRepository recipeRepository;
     private UnitOfMeasureRepository unitOfMeasureRepository;
+    private UserInfoRepository userInfoRepository;
 
     private List<Recipe> getRecipes() {
         List<Recipe> recipes = new ArrayList<>();

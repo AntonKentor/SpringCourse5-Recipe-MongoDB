@@ -18,5 +18,8 @@
     <changeSet id="POPULATE_INGREDIENT_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
         <sqlFile splitStatements="true" endDelimiter="GO" path="sql/PopulateIngredientTable.sql" relativeToChangelogFile="true"/>
     </changeSet>
+    <changeSet id="POPULATE_USER_INFO_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
+        <sqlFile splitStatements="true" endDelimiter="GO" path="sql/PopulateUserInfoTable.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 
 </databaseChangeLog>

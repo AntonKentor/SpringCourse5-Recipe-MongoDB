@@ -24,5 +24,8 @@
     <changeSet id="CREATE_CATEGORY_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
         <sqlFile splitStatements="true" endDelimiter="GO" path="sql/CreateCategoryTable.sql" relativeToChangelogFile="true"/>
     </changeSet>
+    <changeSet id="CREATE_USER_INFO_TABLE" author="Anton Mosenbacher" runOnChange="false" failOnError="true" context="production">
+        <sqlFile splitStatements="true" endDelimiter="GO" path="sql/CreateUserInfoTable.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 
 </databaseChangeLog>

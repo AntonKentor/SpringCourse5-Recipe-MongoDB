@@ -26,8 +26,8 @@ public class IndexController {
     private final RecipeService recipeService;
 
     @RequestMapping({"", "/", "/recipe/list"})
-    public String getIndexPage(Model model) {
-        log.debug("in getIndexPage");
+    public String showAllRecipes(Model model) {
+        log.info("Show alla recipes");
         model.addAttribute("recipes", recipeService.getRecipes());
         return "recipe/list.html";
     }

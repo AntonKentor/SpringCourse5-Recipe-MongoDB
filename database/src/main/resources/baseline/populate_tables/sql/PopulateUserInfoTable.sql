@@ -1,0 +1,1 @@
+INSERT [dbo].[user_info] ([user_name], [password], [firstname], [last_name], [role], [country], [enabled]) VALUES (N'user', N'$2a$10$i3star87iWYtx/8ZDD681uHiXTxQWu9b6RhifQARGEg5Sd3lKHw/K', N'Anton', N'Testsson', N'ROLE_ADMIN', N'Sweden', 1)

@@ -52,7 +52,7 @@ public class IndexControllerTest {
 
         ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
 
-        String viewName = indexController.getIndexPage(model);
+        String viewName = indexController.showAllRecipes(model);
         assertEquals(INDEX_PAGE, viewName);
 
         //Verify the number of calls to the method.
