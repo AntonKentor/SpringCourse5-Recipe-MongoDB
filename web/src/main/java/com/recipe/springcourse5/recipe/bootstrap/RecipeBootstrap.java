@@ -50,7 +50,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
     private UserInfo createInitialUser() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setUserName("user");
+        userInfo.setUserName("admin");
         userInfo.setCountry("Sweden");
         userInfo.setEnabled(true);
         userInfo.setFirstname("Anton");

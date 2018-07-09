@@ -23,7 +23,7 @@ public class WebSecurityConfigurations extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().antMatchers("/console/**") //Use this to access h2-console
+                .authorizeRequests().antMatchers("/console/**", "/registration/**") //Use this to access h2-console and registration page
                 .permitAll()
                 .anyRequest()
                 .authenticated()

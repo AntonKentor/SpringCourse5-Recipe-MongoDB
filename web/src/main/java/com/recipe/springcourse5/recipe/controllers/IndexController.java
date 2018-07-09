@@ -40,4 +40,10 @@ public class IndexController {
         }
         return "redirect:/login?logout";
     }
+
+    @GetMapping("/registration")
+    public String registrationPage(){
+        log.info("Register new user");
+        return "/registration";
+    }
 }
