@@ -4,7 +4,7 @@
 
 Run with -DskipTests since sure-fire tests fails. Sure-fireplugin must be fixed.
 
-## Notes!
+## Notes
 
 Before running liquibase the first time in your local environment, the database and user has to be created.
 
