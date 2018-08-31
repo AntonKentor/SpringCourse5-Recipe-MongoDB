@@ -38,11 +38,11 @@ public class IngredientCommandToIngredientTest {
     public void convert() throws Exception {
         //given
         IngredientCommand command = new IngredientCommand();
-        command.setId(LONG_ID_VALUE);
+        command.setId("1");
         command.setAmount(AMOUNT);
         command.setDescription(DESCRIPTION);
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
-        unitOfMeasureCommand.setId(UOM_ID);
+        unitOfMeasureCommand.setId("2");
         command.setUom(unitOfMeasureCommand);
 
         //when
@@ -61,7 +61,7 @@ public class IngredientCommandToIngredientTest {
     public void convertWithNullUOM() throws Exception {
         //given
         IngredientCommand command = new IngredientCommand();
-        command.setId(LONG_ID_VALUE);
+        command.setId("1");
         command.setAmount(AMOUNT);
         command.setDescription(DESCRIPTION);
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();

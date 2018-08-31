@@ -3,7 +3,7 @@ package com.recipe.springcourse5.recipe;
 
 public interface TestConstants {
 
-    public static final Long LONG_ID_VALUE = 1L;
+    public static final String LONG_ID_VALUE = "1";
     public static final String DESCRIPTION = "description";
     public static final String NEW_DESCRIPTION = "new description";
     public static final String DIRECTIONS = "Directions";

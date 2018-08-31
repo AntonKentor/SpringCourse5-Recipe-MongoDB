@@ -32,7 +32,7 @@ public class CategoryCommandToCategoryTest {
     public void convert() throws Exception {
         //given
         CategoryCommand categoryCommand = new CategoryCommand();
-        categoryCommand.setId(LONG_ID_VALUE);
+        categoryCommand.setId("1");
         categoryCommand.setDescription(DESCRIPTION);
 
         //when

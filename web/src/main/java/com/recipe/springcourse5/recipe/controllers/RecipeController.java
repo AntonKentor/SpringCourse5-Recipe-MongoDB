@@ -3,7 +3,6 @@ package com.recipe.springcourse5.recipe.controllers;
 import com.recipe.springcourse5.recipe.commands.RecipeCommand;
 import com.recipe.springcourse5.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
-import org.bouncycastle.asn1.x500.style.RFC4519Style;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +24,7 @@ public class RecipeController {
     @GetMapping("/{id}/show")
     public String showById(@PathVariable String id, Model model) {
         log.info("Showing recipe with id : " + id);
-        model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
+        model.addAttribute("recipe", recipeService.findById(id));
         return "recipe/show";
     }
 
@@ -39,7 +38,7 @@ public class RecipeController {
     @GetMapping("/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model) {
         log.info("updating recipe with id: " + id);
-        model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
+        model.addAttribute("recipe", recipeService.findCommandById(id));
         return "recipe/recipeForm";
     }
 
@@ -62,7 +61,7 @@ public class RecipeController {
     @GetMapping("/{id}/delete")
     public String deleteById(@PathVariable String id, Model model) {
         log.info("delete recipe with id : " + id);
-        recipeService.deleteById(Long.valueOf(id));
+        recipeService.deleteById(id);
         return ("redirect:/");
     }
 

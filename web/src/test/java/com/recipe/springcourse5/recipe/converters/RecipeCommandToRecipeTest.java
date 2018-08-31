@@ -13,10 +13,10 @@ import static com.recipe.springcourse5.recipe.TestConstants.*;
 import static org.junit.Assert.*;
 
 public class RecipeCommandToRecipeTest {
-    private static final Long RECIPE_ID = 1L;
+    private static final String RECIPE_ID = "1";
     private static final String SOURCE = "Source";
     private static final String URL = "Some URL";
-    private static final Long CAT_ID_1 = 1L;
+    private static final String CAT_ID_1 = "1";
     private static final Long CAT_ID2 = 2L;
     private static final Long INGRED_ID_1 = 3L;
     private static final Long INGRED_ID_2 = 4L;
@@ -46,7 +46,7 @@ public class RecipeCommandToRecipeTest {
     public void convert() throws Exception {
         //given
         RecipeCommand recipeCommand = new RecipeCommand();
-        recipeCommand.setId(RECIPE_ID);
+        recipeCommand.setId("1");
         recipeCommand.setCookTime(COOK_TIME);
         recipeCommand.setPrepTime(PREP_TIME);
         recipeCommand.setDescription(DESCRIPTION);
@@ -57,24 +57,24 @@ public class RecipeCommandToRecipeTest {
         recipeCommand.setUrl(URL);
 
         NotesCommand notes = new NotesCommand();
-        notes.setId(NOTES_ID);
+        notes.setId("9");
 
         recipeCommand.setNotes(notes);
 
         CategoryCommand category = new CategoryCommand();
-        category.setId(CAT_ID_1);
+        category.setId("1");
 
         CategoryCommand category2 = new CategoryCommand();
-        category2.setId(CAT_ID2);
+        category2.setId("1");
 
         recipeCommand.getCategories().add(category);
         recipeCommand.getCategories().add(category2);
 
         IngredientCommand ingredient = new IngredientCommand();
-        ingredient.setId(INGRED_ID_1);
+        ingredient.setId("1");
 
         IngredientCommand ingredient2 = new IngredientCommand();
-        ingredient2.setId(INGRED_ID_2);
+        ingredient2.setId("4");
 
         recipeCommand.getIngredients().add(ingredient);
         recipeCommand.getIngredients().add(ingredient2);

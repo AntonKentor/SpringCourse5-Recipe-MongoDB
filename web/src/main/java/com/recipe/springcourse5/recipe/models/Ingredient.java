@@ -1,21 +1,28 @@
 package com.recipe.springcourse5.recipe.models;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.UUID;
 
-@Data
-@EqualsAndHashCode(exclude = {"recipe"})
-@Entity
+@Getter
+@Setter
 public class Ingredient {
+
+    private String id = UUID.randomUUID().toString();
+    private String description;
+    private BigDecimal amount;
+
+    @DBRef
+    private UnitOfMeasure uom;
 
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure, Recipe recipe) {
         this.description = description;
         this.amount = amount;
         this.uom = unitOfMeasure;
-        this.recipe = recipe;
+//        this.recipe = recipe;
     }
 
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure) {
@@ -28,16 +35,4 @@ public class Ingredient {
 
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String description;
-    private BigDecimal amount;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    private UnitOfMeasure uom;
-
-    @ManyToOne
-    private Recipe recipe;
 }

@@ -14,8 +14,8 @@ import static org.junit.Assert.*;
 
 public class RecipeToRecipeCommandTest {
 
-    private static final Long RECIPE_ID = 1L;
-    private static final Long CAT_ID_1 = 1L;
+    private static final String RECIPE_ID = "1";
+    private static final String CAT_ID_1 = "1";
     private static final Long CAT_ID2 = 2L;
     private static final Long INGRED_ID_1 = 3L;
     private static final Long INGRED_ID_2 = 4L;
@@ -56,7 +56,7 @@ public class RecipeToRecipeCommandTest {
         recipe.setUrl(URL);
 
         Notes notes = new Notes();
-        notes.setId(NOTES_ID);
+        notes.setId("9");
 
         recipe.setNotes(notes);
 
@@ -64,16 +64,16 @@ public class RecipeToRecipeCommandTest {
         category.setId(CAT_ID_1);
 
         Category category2 = new Category();
-        category2.setId(CAT_ID2);
+        category2.setId("2");
 
         recipe.getCategories().add(category);
         recipe.getCategories().add(category2);
 
         Ingredient ingredient = new Ingredient();
-        ingredient.setId(INGRED_ID_1);
+        ingredient.setId("3");
 
         Ingredient ingredient2 = new Ingredient();
-        ingredient2.setId(INGRED_ID_2);
+        ingredient2.setId("4");
 
         recipe.getIngredients().add(ingredient);
         recipe.getIngredients().add(ingredient2);
