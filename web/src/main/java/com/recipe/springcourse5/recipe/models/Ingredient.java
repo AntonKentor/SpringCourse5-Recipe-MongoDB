@@ -18,13 +18,6 @@ public class Ingredient {
     @DBRef
     private UnitOfMeasure uom;
 
-    public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure, Recipe recipe) {
-        this.description = description;
-        this.amount = amount;
-        this.uom = unitOfMeasure;
-//        this.recipe = recipe;
-    }
-
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure) {
         this.description = description;
         this.amount = amount;
