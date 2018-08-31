@@ -39,7 +39,7 @@ public class ImageServiceImplTest {
         recipe.setId(id);
         Optional<Recipe> recipeOptional = Optional.of(recipe);
 
-        when(recipeRepository.findById("22")).thenReturn(recipeOptional);
+        when(recipeRepository.findById("2")).thenReturn(recipeOptional);
 
         ArgumentCaptor<Recipe> argumentCaptor = ArgumentCaptor.forClass(Recipe.class);
 

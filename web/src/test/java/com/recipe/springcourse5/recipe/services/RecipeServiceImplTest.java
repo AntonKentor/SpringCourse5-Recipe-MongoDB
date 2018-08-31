@@ -42,12 +42,12 @@ public class RecipeServiceImplTest {
         recipe.setId("1");
         Optional<Recipe> recipeOptional = Optional.of(recipe);
 
-        when(recipeRepository.findById("33")).thenReturn(recipeOptional);
+        when(recipeRepository.findById("1")).thenReturn(recipeOptional);
 
         Recipe recipeReturned = recipeService.findById("1");
 
         assertNotNull("Null recipe returned", recipeReturned);
-        verify(recipeRepository, times(1)).findById("33");
+        verify(recipeRepository, times(1)).findById("1");
         verify(recipeRepository, never()).findAll();
     }
 
@@ -57,7 +57,7 @@ public class RecipeServiceImplTest {
         recipe.setId("1");
         Optional<Recipe> recipeOptional = Optional.of(recipe);
 
-        when(recipeRepository.findById("33")).thenReturn(recipeOptional);
+        when(recipeRepository.findById("1")).thenReturn(recipeOptional);
 
         RecipeCommand recipeCommand = new RecipeCommand();
         recipeCommand.setId("1");
@@ -67,7 +67,7 @@ public class RecipeServiceImplTest {
         RecipeCommand commandById = recipeService.findCommandById("1");
 
         assertNotNull("Null recipe returned", commandById);
-        verify(recipeRepository, times(1)).findById("33");
+        verify(recipeRepository, times(1)).findById("1");
         verify(recipeRepository, never()).findAll();
     }
 
@@ -99,7 +99,7 @@ public class RecipeServiceImplTest {
         //no 'when', since method has void return type
 
         //then
-        verify(recipeRepository, times(1)).deleteById("33");
+        verify(recipeRepository, times(1)).deleteById("2");
     }
 
     @Test(expected = NotFoundException.class)
