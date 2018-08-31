@@ -74,11 +74,11 @@ public class IngredientServiceImplTest {
         when(recipeRepository.findById("1")).thenReturn(recipeOptional);
 
         //then
-        IngredientCommand ingredientCommand = ingredientService.findByRecipeIdAndIngredientId("1", "3");
+        IngredientCommand ingredientCommand = ingredientService.findByRecipeIdAndIngredientId("1", "1");
 
         //when
-        assertEquals(Long.valueOf(3L), ingredientCommand.getId());
-        assertEquals(Long.valueOf("1"), ingredientCommand.getRecipeId());
+        assertEquals("1", ingredientCommand.getId());
+        assertEquals("1", ingredientCommand.getRecipeId());
         verify(recipeRepository, times(1)).findById("1");
     }
 
