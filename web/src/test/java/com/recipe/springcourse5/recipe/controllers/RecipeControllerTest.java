@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -60,9 +59,8 @@ public class RecipeControllerTest {
     @Test
     public void testBadRequest() throws Exception {
 
-        mockMvc.perform(get("/recipe/asdf/show"))
-                .andExpect(status().isBadRequest())
-                .andExpect(view().name("400error"));
+        mockMvc.perform(get("/recipe//show"))
+                .andExpect(status().is4xxClientError());
     }
 
     @Test
@@ -121,9 +119,9 @@ public class RecipeControllerTest {
         RecipeCommand command = new RecipeCommand();
         command.setId("2");
 
-        when(recipeService.findCommandById("33")).thenReturn(command);
+        when(recipeService.findCommandById("2")).thenReturn(command);
 
-        mockMvc.perform(get("/recipe/1/update"))
+        mockMvc.perform(get("/recipe/2/update"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/recipeForm"))
                 .andExpect(model().attributeExists("recipe"));
@@ -134,6 +132,6 @@ public class RecipeControllerTest {
         mockMvc.perform(get("/recipe/1/delete"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/"));
-        verify(recipeService, times(1)).deleteById("33");
+        verify(recipeService, times(1)).deleteById("1");
     }
 }

@@ -46,7 +46,7 @@ public class IngredientControllerTest {
     public void testListIngredients() throws Exception {
         //given
         RecipeCommand recipeCommand = new RecipeCommand();
-        when(recipeService.findCommandById("22")).thenReturn(recipeCommand);
+        when(recipeService.findCommandById("1")).thenReturn(recipeCommand);
 
         //when
         mockMvc.perform(get("/recipe/1/ingredients"))
@@ -55,7 +55,7 @@ public class IngredientControllerTest {
                 .andExpect(model().attributeExists("recipe"));
 
         //then
-        verify(recipeService, times(1)).findCommandById("22");
+        verify(recipeService, times(1)).findCommandById("1");
     }
 
     @Test
@@ -64,7 +64,7 @@ public class IngredientControllerTest {
         IngredientCommand ingredientCommand = new IngredientCommand();
 
         //when
-        when(ingredientService.findByRecipeIdAndIngredientId("22", "33")).thenReturn(ingredientCommand);
+        when(ingredientService.findByRecipeIdAndIngredientId("1", "2")).thenReturn(ingredientCommand);
 
         //then
         mockMvc.perform(get("/recipe/1/ingredient/2/show"))
@@ -79,7 +79,7 @@ public class IngredientControllerTest {
         IngredientCommand ingredientCommand = new IngredientCommand();
 
         //when
-        when(ingredientService.findByRecipeIdAndIngredientId("22", "33")).thenReturn(ingredientCommand);
+        when(ingredientService.findByRecipeIdAndIngredientId("1", "2")).thenReturn(ingredientCommand);
         when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
 
         //then
@@ -125,7 +125,7 @@ public class IngredientControllerTest {
                 .andExpect(model().attributeExists("ingredient"))
                 .andExpect(model().attributeExists("uomList"));
 
-        verify(recipeService, times(1)).findCommandById("22");
+        verify(recipeService, times(1)).findCommandById("1");
     }
 
     @Test
@@ -133,7 +133,7 @@ public class IngredientControllerTest {
         mockMvc.perform(get("/recipe/1/ingredient/2/delete"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipe/1/ingredients"));
-        verify(ingredientService, times(1)).deleteById("22", "1");
+        verify(ingredientService, times(1)).deleteById("1", "2");
     }
 }
 

@@ -13,8 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
@@ -44,13 +42,13 @@ public class ImageControllerTest {
         RecipeCommand command = new RecipeCommand();
         command.setId("1");
 
-        when(recipeService.findCommandById("33")).thenReturn(command);
+        when(recipeService.findCommandById("1")).thenReturn(command);
 
         mockMvc.perform(get("/recipe/1/image"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("recipe"));
 
-        verify(recipeService, times(1)).findCommandById("33");
+        verify(recipeService, times(1)).findCommandById("1");
 
     }
 
@@ -64,7 +62,7 @@ public class ImageControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(header().string("Location", "/recipe/1/show"));
 
-        verify(imageService, times(1)).saveImageFile("33", any());
+        verify(imageService, times(1)).saveImageFile("1", multipartFile);
     }
 
     @Test
@@ -85,7 +83,7 @@ public class ImageControllerTest {
 
         recipeCommand.setImage(bytesBoxed);
 
-        when(recipeService.findCommandById("33")).thenReturn(recipeCommand);
+        when(recipeService.findCommandById("1")).thenReturn(recipeCommand);
 
         //when
         MockHttpServletResponse response = mockMvc.perform(get("/recipe/1/recipeimage"))
@@ -99,8 +97,7 @@ public class ImageControllerTest {
 
     @Test
     public void testGetImageNumberFormatException() throws Exception {
-        mockMvc.perform(get("/recipe/asdf/recipeimage"))
-                .andExpect(status().isBadRequest())
-                .andExpect(view().name("400error"));
+        mockMvc.perform(get("/recipe//recipeimage"))
+                .andExpect(status().is4xxClientError());
     }
 }
