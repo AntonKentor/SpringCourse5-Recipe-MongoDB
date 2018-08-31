@@ -72,7 +72,7 @@ public class IngredientToIngredientCommandTest {
         //then
         assertEquals(LONG_ID_VALUE, ingredientCommand.getId());
         assertNotNull(ingredientCommand.getUom());
-        assertEquals(UOM_ID, ingredientCommand.getUom().getId());
+        assertEquals(String.valueOf(UOM_ID), ingredientCommand.getUom().getId());
         // assertEquals(RECIPE, ingredientCommand.get);
         assertEquals(AMOUNT, ingredientCommand.getAmount());
         assertEquals(DESCRIPTION, ingredientCommand.getDescription());
