@@ -1,10 +1,11 @@
 package com.recipe.springcourse5.recipe.repositories;
 
 import com.recipe.springcourse5.recipe.models.UnitOfMeasure;
-import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
-import reactor.core.publisher.Mono;
+import org.springframework.data.repository.CrudRepository;
 
-public interface UnitOfMeasureRepository extends ReactiveMongoRepository<UnitOfMeasure, String> {
+import java.util.Optional;
 
-    Mono<UnitOfMeasure> findByDescription(String description);
+public interface UnitOfMeasureRepository extends CrudRepository<UnitOfMeasure, String> {
+
+    Optional<UnitOfMeasure> findByDescription(String description);
 }
