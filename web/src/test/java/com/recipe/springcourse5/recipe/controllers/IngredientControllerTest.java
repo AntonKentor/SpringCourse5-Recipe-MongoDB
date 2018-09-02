@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import reactor.core.publisher.Mono;
 
 import java.util.HashSet;
 
@@ -64,7 +65,7 @@ public class IngredientControllerTest {
         IngredientCommand ingredientCommand = new IngredientCommand();
 
         //when
-        when(ingredientService.findByRecipeIdAndIngredientId("1", "2")).thenReturn(ingredientCommand);
+        when(ingredientService.findByRecipeIdAndIngredientId("1", "2")).thenReturn(Mono.just(ingredientCommand));
 
         //then
         mockMvc.perform(get("/recipe/1/ingredient/2/show"))
@@ -79,7 +80,7 @@ public class IngredientControllerTest {
         IngredientCommand ingredientCommand = new IngredientCommand();
 
         //when
-        when(ingredientService.findByRecipeIdAndIngredientId("1", "2")).thenReturn(ingredientCommand);
+        when(ingredientService.findByRecipeIdAndIngredientId("1", "2")).thenReturn(Mono.just(ingredientCommand));
         when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
 
         //then
@@ -98,7 +99,7 @@ public class IngredientControllerTest {
         command.setRecipeId("2");
 
         //when
-        when(ingredientService.saveIngredientCommand(any())).thenReturn(command);
+        when(ingredientService.saveIngredientCommand(any())).thenReturn(Mono.just(command));
 
         //then
         mockMvc.perform(post("/recipe/2/ingredient")
