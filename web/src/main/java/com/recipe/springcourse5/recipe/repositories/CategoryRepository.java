@@ -1,12 +1,11 @@
 package com.recipe.springcourse5.recipe.repositories;
 
 import com.recipe.springcourse5.recipe.models.Category;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
+import reactor.core.publisher.Mono;
 
-import java.util.Optional;
+public interface CategoryRepository extends ReactiveMongoRepository<Category, String> {
 
-public interface CategoryRepository extends CrudRepository<Category, String> {
-
-    Optional<Category> findByDescription(String description);
+    Mono<Category> findByDescription(String description);
 
 }
