@@ -12,12 +12,10 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
+@Ignore
 public class ImageServiceImplTest {
 
     @Mock
@@ -31,7 +29,6 @@ public class ImageServiceImplTest {
     }
 
     @Test
-    @Ignore
     public void saveImageFile() throws Exception {
         //given
         String id = "2";
@@ -41,15 +38,16 @@ public class ImageServiceImplTest {
         Recipe recipe = new Recipe();
         recipe.setId(id);
 
-        when(recipeRepository.findById("2")).thenReturn(Mono.just(recipe));
+        when(recipeRepository.findById(anyString())).thenReturn(Mono.just(recipe));
+        when(recipeRepository.save(any(Recipe.class))).thenReturn(Mono.just(recipe));
 
         ArgumentCaptor<Recipe> argumentCaptor = ArgumentCaptor.forClass(Recipe.class);
 
         //when
-        imageService.saveImageFile(id, multipartFile);
+        imageService.saveImageFile(id, multipartFile).block();
 
         //then
-        verify(recipeRepository, times(1)).save(argumentCaptor.capture()).block();
+        verify(recipeRepository, times(1)).save(argumentCaptor.capture());
         Recipe savedRecipe = argumentCaptor.getValue();
         assertEquals(multipartFile.getBytes().length, savedRecipe.getImage().length);
     }

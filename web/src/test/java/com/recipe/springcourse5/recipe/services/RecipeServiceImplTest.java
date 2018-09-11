@@ -14,6 +14,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -39,14 +40,16 @@ public class RecipeServiceImplTest {
 
     @Test
     public void getRecipeByIdTest() throws Exception {
+
         Recipe recipe = new Recipe();
         recipe.setId("1");
 
         when(recipeRepository.findById("1")).thenReturn(Mono.just(recipe));
 
-        Recipe recipeReturned = recipeService.findById("1");
+        Recipe recipeReturned = recipeService.findById("1").block();
 
         assertNotNull("Null recipe returned", recipeReturned);
+
         verify(recipeRepository, times(1)).findById("1");
         verify(recipeRepository, never()).findAll();
     }
@@ -63,7 +66,7 @@ public class RecipeServiceImplTest {
 
         when(recipeToRecipeCommand.convert(any())).thenReturn(recipeCommand);
 
-        RecipeCommand commandById = recipeService.findCommandById("1");
+        RecipeCommand commandById = recipeService.findCommandById("1").block();
 
         assertNotNull("Null recipe returned", commandById);
         verify(recipeRepository, times(1)).findById("1");
@@ -73,13 +76,17 @@ public class RecipeServiceImplTest {
     @Test
     public void getRecipesTest() throws Exception {
 
-        when(recipeRepository.findAll()).thenReturn(Flux.just(new Recipe()));
+        Recipe recipe = new Recipe();
+        HashSet recipesData = new HashSet();
+        recipesData.add(recipe);
 
-        Set<Recipe> recipes = recipeService.getRecipes();
+        when(recipeService.getRecipes()).thenReturn(Flux.just(recipe));
+
+        List<Recipe> recipes = recipeService.getRecipes().collectList().block();
 
         assertEquals(recipes.size(), 1);
         verify(recipeRepository, times(1)).findAll();
-        verify(recipeRepository, never()).findById("33");
+        verify(recipeRepository, never()).findById(anyString());
     }
 
     @Test
@@ -96,16 +103,4 @@ public class RecipeServiceImplTest {
         //then
         verify(recipeRepository, times(1)).deleteById("2");
     }
-
-    @Test(expected = NullPointerException.class)
-    public void getRecipeByIdRecipeNotFound() {
-
-        Recipe recipe = new Recipe();
-        recipe.setId("1");
-
-        when(recipeRepository.findById("33")).thenReturn(Mono.just(recipe));
-//        when(recipeRepository.findById("33")).thenReturn(Mono.empty());
-        Recipe returnedRecipe = recipeRepository.findById("111").block();
-    }
-
 }

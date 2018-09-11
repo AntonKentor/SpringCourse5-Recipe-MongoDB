@@ -7,8 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import reactor.core.publisher.Mono;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 
 
@@ -23,29 +23,28 @@ public class ImageServiceImpl implements ImageService {
 
     private RecipeRepository recipeRepository;
 
-    @Transactional
     @Override
-    public void saveImageFile(String recipeId, MultipartFile multipartFile) {
-        log.info("recieved a file");
-        try {
-            Recipe recipe = recipeRepository.findById(recipeId).block();
+    public Mono<Void> saveImageFile(String recipeId, MultipartFile multipartFile) {
 
-            Byte[] byteObjects = new Byte[multipartFile.getBytes().length];
+        Mono<Recipe> recipeMono = recipeRepository.findById(recipeId)
+                .map(recipe -> {
+                    Byte[] byteOfObjects = new Byte[0];
+                    try {
+                        byteOfObjects = new Byte[multipartFile.getBytes().length];
 
-            int i = 0;
+                        int i = 0;
 
-            for (byte b : multipartFile.getBytes()) {
-                byteObjects[i++] = b;
-            }
-
-            recipe.setImage(byteObjects);
-
-            recipeRepository.save(recipe).block();
-        } catch (IOException e) {
-            //todo handle better
-            log.error("Error occurred", e);
-
-            e.printStackTrace();
-        }
+                        for (byte b : byteOfObjects) {
+                            byteOfObjects[i++] = b;
+                        }
+                        recipe.setImage(byteOfObjects);
+                        return recipe;
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        throw new RuntimeException(ex);
+                    }
+                });
+        recipeRepository.save(recipeMono.block()).block();
+        return Mono.empty();
     }
 }
