@@ -2,6 +2,7 @@ package com.recipe.springcourse5.recipe.controllers;
 
 import com.recipe.springcourse5.recipe.commands.IngredientCommand;
 import com.recipe.springcourse5.recipe.commands.RecipeCommand;
+import com.recipe.springcourse5.recipe.commands.UnitOfMeasureCommand;
 import com.recipe.springcourse5.recipe.services.IngredientService;
 import com.recipe.springcourse5.recipe.services.RecipeService;
 import com.recipe.springcourse5.recipe.services.UnitOfMeasureService;
@@ -12,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.HashSet;
@@ -81,7 +83,7 @@ public class IngredientControllerTest {
 
         //when
         when(ingredientService.findByRecipeIdAndIngredientId("1", "2")).thenReturn(Mono.just(ingredientCommand));
-        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
+        when(unitOfMeasureService.listAllUoms()).thenReturn(Flux.just(new UnitOfMeasureCommand()));
 
         //then
         mockMvc.perform(get("/recipe/1/ingredient/2/update"))
@@ -118,7 +120,7 @@ public class IngredientControllerTest {
         recipeCommand.setId("1");
 
         when(recipeService.findCommandById("22")).thenReturn(recipeCommand);
-        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
+        when(unitOfMeasureService.listAllUoms()).thenReturn(Flux.just(new UnitOfMeasureCommand()));
 
         mockMvc.perform(get("/recipe/1/ingredient/new"))
                 .andExpect(status().isOk())
@@ -131,6 +133,9 @@ public class IngredientControllerTest {
 
     @Test
     public void deleteIngredient() throws Exception {
+
+        when(ingredientService.deleteById(anyString(), anyString())).thenReturn(Mono.empty());
+
         mockMvc.perform(get("/recipe/1/ingredient/2/delete"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipe/1/ingredients"));

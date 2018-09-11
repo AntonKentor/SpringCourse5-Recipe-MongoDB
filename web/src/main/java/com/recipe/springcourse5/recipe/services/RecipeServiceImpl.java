@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -34,20 +33,20 @@ public class RecipeServiceImpl implements RecipeService {
     public Set<Recipe> getRecipes() {
         Set<Recipe> recipes = new HashSet<>();
         log.debug("in getRecipes");
-        recipeRepository.findAll().iterator().forEachRemaining(recipes::add);
+        recipeRepository.findAll().toIterable().iterator().forEachRemaining(recipes::add);
         return recipes;
     }
 
     @Override
     public Recipe findById(String id) {
         log.debug("In RecipeServiceImpl, method findById with parametervalue: " + id);
-        Optional<Recipe> recipe = recipeRepository.findById(id);
+        Recipe recipe = recipeRepository.findById(id).block();
 
-        if (!recipe.isPresent()) {
+        if (recipe == null) {
             log.error("No recipe with id was found");
             throw new NotFoundException("No recipe with id " + id + " was found");
         }
-        return recipe.get();
+        return recipe;
     }
 
     @Override
@@ -65,14 +64,14 @@ public class RecipeServiceImpl implements RecipeService {
         }
 
         Recipe detachedRecipe = recipeCommandToRecipe.convert(command);
-        Recipe savedRecipe = recipeRepository.save(detachedRecipe);
+        Recipe savedRecipe = recipeRepository.save(detachedRecipe).block();
         log.debug("Saved RecipeId:" + savedRecipe.getId());
         return recipeToRecipeCommand.convert(savedRecipe);
     }
 
     @Override
     public void deleteById(String idToDelete) {
-        recipeRepository.deleteById(idToDelete);
+        recipeRepository.deleteById(idToDelete).block();
     }
 
 }

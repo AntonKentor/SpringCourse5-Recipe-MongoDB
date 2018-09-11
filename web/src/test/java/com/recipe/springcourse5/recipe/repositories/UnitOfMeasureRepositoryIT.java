@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Optional;
-
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @DataMongoTest
 public class UnitOfMeasureRepositoryIT {
+
+    private static final String EACH = "Each";
 
     /*
      * This testclass performe some Integrations tests.
@@ -34,6 +35,7 @@ public class UnitOfMeasureRepositoryIT {
 
     @Before
     public void setUp() throws Exception {
+        unitOfMeasureRepository.deleteAll().block();
         RecipeBootstrap recipeBootstrap = new RecipeBootstrap(categoryRepository, recipeRepository, unitOfMeasureRepository, userInfoRepository);
         recipeBootstrap.onApplicationEvent(null);
     }
@@ -44,16 +46,42 @@ public class UnitOfMeasureRepositoryIT {
      * Thats because Spring context is loaded at the begining for the first test to run and instead of loading is once
      * again it will be reused.
      * */
-
     @Test
     public void findByDescriptionTeaspoon() {
-        Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Teaspoon");
-        assertEquals("Teaspoon", unitOfMeasure.get().getDescription());
+        UnitOfMeasure unitOfMeasure = unitOfMeasureRepository.findByDescription("Teaspoon").block();
+        assertEquals("Teaspoon", unitOfMeasure.getDescription());
     }
 
     @Test
     public void findByDescriptionCup() {
-        Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Cup");
-        assertEquals("Cup", unitOfMeasure.get().getDescription());
+        UnitOfMeasure unitOfMeasure = unitOfMeasureRepository.findByDescription("Cup").block();
+        assertEquals("Cup", unitOfMeasure.getDescription());
     }
+
+    @Test
+    public void saveNewUom(){
+        UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
+        unitOfMeasure.setDescription("Unique");
+
+        unitOfMeasureRepository.save(unitOfMeasure).block();
+
+        UnitOfMeasure uniqueUnitOfMeasure = unitOfMeasureRepository.findByDescription("Unique").block();
+
+        assertEquals("Unique", uniqueUnitOfMeasure.getDescription());
+
+        unitOfMeasureRepository.delete(uniqueUnitOfMeasure).block();
+
+        uniqueUnitOfMeasure = unitOfMeasureRepository.findByDescription("Unique").block();
+        assertNull(uniqueUnitOfMeasure);
+    }
+
+    @Test
+    public void findByDescription() throws Exception {
+
+        UnitOfMeasure fetchedUnitOfMeasure = unitOfMeasureRepository.findByDescription(EACH).block();
+
+        assertEquals(EACH, fetchedUnitOfMeasure.getDescription());
+    }
+
+
 }

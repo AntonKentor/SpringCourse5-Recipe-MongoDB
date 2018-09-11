@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import reactor.core.publisher.Flux;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,7 +39,7 @@ public class UnitOfMeasureServiceImplTest {
     @Test
     public void listAllUoms() {
         //given
-        List<UnitOfMeasure> unitOfMeasures = new ArrayList<>();
+        Set<UnitOfMeasure> unitOfMeasures = new HashSet<>();
         UnitOfMeasure uom1 = new UnitOfMeasure();
         uom1.setId("1");
         unitOfMeasures.add(uom1);
@@ -48,10 +48,10 @@ public class UnitOfMeasureServiceImplTest {
         uom2.setId("2");
         unitOfMeasures.add(uom2);
 
-        when(unitOfMeasureRepository.findAll()).thenReturn(unitOfMeasures);
+        when(unitOfMeasureRepository.findAll()).thenReturn(Flux.just(uom1, uom2));
 
         //when
-        Set<UnitOfMeasureCommand> commands = unitOfMeasureService.listAllUoms();
+        List<UnitOfMeasureCommand> commands = unitOfMeasureService.listAllUoms().collectList().block();
 
         //then
         assertEquals(2, commands.size());

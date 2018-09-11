@@ -9,8 +9,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import reactor.core.publisher.Flux;
 
 import javax.transaction.Transactional;
+
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -32,8 +35,8 @@ public class RecipeServiceIT {
     @Test
     public void testSaveOfDescription() throws Exception {
         //given
-        Iterable<Recipe> recipes = recipeRepository.findAll();
-        Recipe testRecipe = recipes.iterator().next();
+        Flux<Recipe> recipes = recipeRepository.findAll();
+        Recipe testRecipe = recipes.blockFirst();
         RecipeCommand testRecipeCommand = recipeToRecipeCommand.convert(testRecipe);
 
         //when

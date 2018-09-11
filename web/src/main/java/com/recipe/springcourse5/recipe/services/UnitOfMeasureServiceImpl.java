@@ -6,10 +6,7 @@ import com.recipe.springcourse5.recipe.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
+import reactor.core.publisher.Flux;
 
 @Slf4j
 @Service
@@ -25,12 +22,12 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
     private UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand;
 
     @Override
-    public Set<UnitOfMeasureCommand> listAllUoms() {
+    public Flux<UnitOfMeasureCommand> listAllUoms() {
         log.info("listAllUoms UnitOfMeasureServiceImpl");
 
-        return StreamSupport.stream(unitOfMeasureRepository.findAll()
-                .spliterator(), false)
-                .map(unitOfMeasureToUnitOfMeasureCommand::convert)
-                .collect(Collectors.toSet());
+        return unitOfMeasureRepository
+                .findAll()
+                .map(unitOfMeasureToUnitOfMeasureCommand::convert);
+
     }
 }

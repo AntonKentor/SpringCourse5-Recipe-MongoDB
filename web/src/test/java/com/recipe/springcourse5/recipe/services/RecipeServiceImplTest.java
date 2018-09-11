@@ -10,9 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -27,7 +28,7 @@ public class RecipeServiceImplTest {
     private RecipeToRecipeCommand recipeToRecipeCommand;
     @Mock
     private RecipeCommandToRecipe recipeCommandToRecipe;
-
+    @Mock
     private RecipeServiceImpl recipeService;
 
     @Before
@@ -40,9 +41,8 @@ public class RecipeServiceImplTest {
     public void getRecipeByIdTest() throws Exception {
         Recipe recipe = new Recipe();
         recipe.setId("1");
-        Optional<Recipe> recipeOptional = Optional.of(recipe);
 
-        when(recipeRepository.findById("1")).thenReturn(recipeOptional);
+        when(recipeRepository.findById("1")).thenReturn(Mono.just(recipe));
 
         Recipe recipeReturned = recipeService.findById("1");
 
@@ -55,9 +55,8 @@ public class RecipeServiceImplTest {
     public void getRecipeCommandByIdTest() throws Exception {
         Recipe recipe = new Recipe();
         recipe.setId("1");
-        Optional<Recipe> recipeOptional = Optional.of(recipe);
 
-        when(recipeRepository.findById("1")).thenReturn(recipeOptional);
+        when(recipeRepository.findById("1")).thenReturn(Mono.just(recipe));
 
         RecipeCommand recipeCommand = new RecipeCommand();
         recipeCommand.setId("1");
@@ -74,11 +73,7 @@ public class RecipeServiceImplTest {
     @Test
     public void getRecipesTest() throws Exception {
 
-        Recipe recipe = new Recipe();
-        HashSet receipesData = new HashSet();
-        receipesData.add(recipe);
-
-        when(recipeService.getRecipes()).thenReturn(receipesData);
+        when(recipeRepository.findAll()).thenReturn(Flux.just(new Recipe()));
 
         Set<Recipe> recipes = recipeService.getRecipes();
 
@@ -94,20 +89,23 @@ public class RecipeServiceImplTest {
         String idToDelete = "2";
 
         //when
-        recipeService.deleteById(idToDelete);
+        when(recipeRepository.deleteById(idToDelete)).thenReturn(Mono.empty());
 
-        //no 'when', since method has void return type
+        recipeRepository.deleteById(idToDelete).block();
 
         //then
         verify(recipeRepository, times(1)).deleteById("2");
     }
 
-    @Test(expected = NotFoundException.class)
-    public void getRecipeByIdRecipeNotFound(){
-        Optional<Recipe> recipe = Optional.empty();
-        when(recipeRepository.findById("33")).thenReturn(recipe);
+    @Test(expected = NullPointerException.class)
+    public void getRecipeByIdRecipeNotFound() {
 
-        Recipe returnedRecipe = recipeService.findById("1");
+        Recipe recipe = new Recipe();
+        recipe.setId("1");
+
+        when(recipeRepository.findById("33")).thenReturn(Mono.just(recipe));
+//        when(recipeRepository.findById("33")).thenReturn(Mono.empty());
+        Recipe returnedRecipe = recipeRepository.findById("111").block();
     }
 
 }

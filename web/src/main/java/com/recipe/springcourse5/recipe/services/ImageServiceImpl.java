@@ -28,7 +28,7 @@ public class ImageServiceImpl implements ImageService {
     public void saveImageFile(String recipeId, MultipartFile multipartFile) {
         log.info("recieved a file");
         try {
-            Recipe recipe = recipeRepository.findById(recipeId).get();
+            Recipe recipe = recipeRepository.findById(recipeId).block();
 
             Byte[] byteObjects = new Byte[multipartFile.getBytes().length];
 
@@ -40,7 +40,7 @@ public class ImageServiceImpl implements ImageService {
 
             recipe.setImage(byteObjects);
 
-            recipeRepository.save(recipe);
+            recipeRepository.save(recipe).block();
         } catch (IOException e) {
             //todo handle better
             log.error("Error occurred", e);
